@@ -45,4 +45,8 @@ public class ServicesFacade {
         }
         return resp;
     }
+
+    public void movePlayer(String pl, int sel, int esp) {
+        mapa.movimientoJugadores(pl, sel, esp);
+    }
 }

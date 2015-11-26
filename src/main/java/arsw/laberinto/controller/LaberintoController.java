@@ -33,23 +33,23 @@ public class LaberintoController {
         return "REST API OK";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/mapa", method = RequestMethod.GET)
     public Mapa getMapa() {
         return services.getMapa();
     }
-    
-    @RequestMapping(value="/jugadores", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/jugadores", method = RequestMethod.GET)
     public List<Player> getPlayers() {
         return services.getMapa().getJugadores();
     }
 
-    @RequestMapping(value="/adicionar", method = RequestMethod.POST)
+    @RequestMapping(value = "/adicionar", method = RequestMethod.POST)
     public ResponseEntity<?> addPlayer(@RequestBody String name) throws Exception {
         services.addPlayer(name);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    
-    @RequestMapping(value="/quitar", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/quitar", method = RequestMethod.POST)
     public ResponseEntity<?> removePlayer(@RequestBody String name) throws Exception {
         services.removePlayer(name);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
