@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html ng-app="modone">
-    <head >
-        <script src="js/libs/angular.min.js"></script>
-        <script src="js/libs/angular-route.js"></script>
-        <script src="js/libs/appmodule.js"></script>
+<html>
+    <head>
+        <title>Laberinto Multiplayer</title>
+        <script src="js/libs/sockjs-0.3.4.js"></script>
+        <script src="js/libs/stomp.js"></script>
+        <script src="js/stomp-ws.js"></script>
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/custom.css">
-        <title>Laberinto Multiplayer</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body ng-controller="plan_control" style="background:url(img/fondo.jpg)">
-        <div  style="alignment-baseline: central">
+    <body style="background:url(img/fondo.jpg)">
+        <div style="alignment-baseline: central">
             <table>
                 <tr>
-                    <td>
-                        <img src="img/laberinto.jpg" style = "width: 179px; height: 113px;"/>
-                    </td>
-                    <td>
-                         <h1 style="color: whitesmoke">Laberinto</h1>
-                    </td>
+                    <td><img src="img/laberinto.jpg" style = "width: 179px; height: 113px;"/></td>
+                    <td><h1 style="color: whitesmoke">Laberinto Multiplayer</h1></td>
                 </tr>
             </table>
-            
-           
-            
         </div>
-        <div>Cuerpo</div>
+        <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
+            Javascript and reload this page!</h2></noscript>
+        <div>
+            <div>
+                <label style="color: whitesmoke">Name:</label><input type="text" id="message"/>
+                <br/>
+                <button id="connect">Connect</button>
+                <button id="disconnect" disabled="disabled">Disconnect</button>
+            </div>
+            <div id="conversationDiv">
+                <canvas id="mapa" width="800" height="600" class="border"></canvas>
+            </div>
+        </div>
     </body>
 </html>

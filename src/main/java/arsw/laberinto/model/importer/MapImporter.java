@@ -1,6 +1,6 @@
-package arsw.laberinto.importer;
+package arsw.laberinto.model.importer;
 
-import arsw.laberinto.game.*;
+import arsw.laberinto.model.game.Mapa;
 import java.io.*;
 import java.util.*;
 import java.util.logging.*;

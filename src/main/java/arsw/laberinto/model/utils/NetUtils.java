@@ -1,4 +1,4 @@
-package arsw.laberinto.utils;
+package arsw.laberinto.model.utils;
 
 import java.net.ConnectException;
 import java.net.InetAddress;

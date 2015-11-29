@@ -1,10 +1,10 @@
-package arsw.laberinto.game;
+package arsw.laberinto.model.game;
 
+import arsw.laberinto.model.utils.NetUtils;
+import arsw.laberinto.model.importer.MapImporter;
 import java.net.*;
 import java.util.*;
 import java.util.logging.*;
-import arsw.laberinto.utils.*;
-import arsw.laberinto.importer.*;
 import java.awt.event.*;
 
 public class Mapa {
@@ -67,6 +67,7 @@ public class Mapa {
         jugadores.add(new Player(415, 490, WIDTH, HEIGHT, SCALE, 10, 10, RED));
     }
 
+    //@Override
     public synchronized void asignarIdPlayer(String ids) throws Exception {
         boolean found = false;
         for (Player d : getJugadores()) {
@@ -81,6 +82,7 @@ public class Mapa {
         }
     }
 
+    //@Override
     public synchronized void sacarIdPlayer(String ids) {
         for (Player d : getJugadores()) {
             if (d.getId().equals(ids)) {
@@ -94,92 +96,32 @@ public class Mapa {
         return numGamers;
     }
 
-    public ArrayList<Player> getJugadores() {
+    public synchronized ArrayList<Player> getJugadores() {
         return jugadores;
     }
 
-    public synchronized ArrayList<Integer> getJugadoresX() {
-        ArrayList<Integer> qdf = new ArrayList<>();
-        for (Player we : getJugadores()) {
-            qdf.add(we.getX());
-        }
-        return qdf;
-    }
-
-    public synchronized ArrayList<Integer> getJugadoresY() {
-        ArrayList<Integer> qdf = new ArrayList<>();
-        for (Player we : getJugadores()) {
-            qdf.add(we.getY());
-        }
-        return qdf;
-    }
-
-    public synchronized ArrayList<String> getJugadoresC() {
-        ArrayList<String> qdf = new ArrayList<>();
-        for (Player we : getJugadores()) {
-            qdf.add(we.getCol());
-        }
-        return qdf;
-    }
-
-    public synchronized Integer getJugadoresW() {
-        if (!getJugadores().isEmpty()) {
-            return getJugadores().get(0).getWidth();
-        } else {
-            return 10;
-        }
-    }
-
-    public synchronized Integer getJugadoresH() {
-        if (!getJugadores().isEmpty()) {
-            return getJugadores().get(0).getHeight();
-        } else {
-            return 10;
-        }
-    }
-
-    public ArrayList<Element> getRestriccion() {
+    private ArrayList<Element> getRestriccion() {
         return restriccion;
     }
 
-    public synchronized ArrayList<Integer> getRestriccionX() {
-        ArrayList<Integer> qdf = new ArrayList<>();
-        for (Element we : getRestriccion()) {
-            qdf.add(we.getX());
+    public synchronized List<Element> getRestriccionWhite() {
+        List<Element> resp = new ArrayList();
+        for (Element e : restriccion) {
+            if (e.getCol().equals(WHITE)) {
+                resp.add(e);
+            }
         }
-        return qdf;
+        return resp;
     }
-
-    public synchronized ArrayList<Integer> getRestriccionY() {
-        ArrayList<Integer> qdf = new ArrayList<>();
-        for (Element we : getRestriccion()) {
-            qdf.add(we.getY());
+    
+    public synchronized List<Element> getRestriccionColored() {
+        List<Element> resp = new ArrayList();
+        for (Element e : restriccion) {
+            if (!e.getCol().equals(WHITE)) {
+                resp.add(e);
+            }
         }
-        return qdf;
-    }
-
-    public synchronized ArrayList<String> getRestriccionC() {
-        ArrayList<String> qdf = new ArrayList<>();
-        for (Element we : getRestriccion()) {
-            qdf.add(we.getCol());
-        }
-        return qdf;
-    }
-
-    public synchronized Integer getRestriccionW() {
-        if (!getRestriccion().isEmpty()) {
-            return getRestriccion().get(0).getWidth();
-        } else {
-            return 10;
-        }
-    }
-
-    public synchronized Integer getRestriccionH() {
-        if (!getRestriccion().isEmpty()) {
-            return getRestriccion().get(0).getHeight();
-        } else {
-            return 10;
-        }
+        return resp;
     }
 
     private ArrayList<Element> lectura(int width, int height, int scale) {
@@ -228,6 +170,7 @@ public class Mapa {
         return wall;
     }
 
+    //@Override
     public void movimientoJugadores(String pl, int sel, int esp) {
         Player fi = getPlayerId(pl);
         switch (sel) {
@@ -260,10 +203,12 @@ public class Mapa {
         return null;
     }
 
+    //@Override
     public synchronized String getMeta() {
         return meta;
     }
 
+    //@Override
     public synchronized void tick() {
         ArrayList<Element> d = new ArrayList<>();
         for (Player l : jugadores) {
@@ -354,6 +299,7 @@ public class Mapa {
         }
     }
 
+    //@Override
     public synchronized String getIP() {
         try {
             return NetUtils.getIPAddress();

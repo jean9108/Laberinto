@@ -1,0 +1,96 @@
+var stompClient = null;
+function setConnected(connected) {
+    document.getElementById('message').disabled = connected;
+    document.getElementById('connect').disabled = connected;
+    document.getElementById('disconnect').disabled = !connected;
+    document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+    //document.getElementById('response').innerHTML = '';
+}
+
+function connect() {
+    var socket = new SockJS('/ws');
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
+        setConnected(true);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/messages', function (serverMessage) {
+            showServerMessage(JSON.parse(serverMessage.body).content);
+        });
+        sendMessage();
+    });
+}
+
+function disconnect() {
+    if (stompClient !== null) {
+        stompClient.disconnect();
+    }
+    setConnected(false);
+    console.log("Disconnected");
+}
+
+function sendMessage() {
+    var message = document.getElementById('message').value;
+    stompClient.send("/app/message", {}, JSON.stringify({'message': message}));
+}
+
+function showServerMessage(message) {
+    var restriccion = message.restriccion;
+    var jugadores = message.jugadores;
+    var meta = message.meta;
+    var ip = message.ip;
+    var canvas = document.getElementById('mapa');
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    render(ctx, jugadores);
+    render(ctx, restriccion);
+    ctx.stroke();
+}
+
+function render(ctx, elements) {
+    for (var q = 0; q < elements.length; q++) {
+        var x = elements[q].x, y = elements[q].y;
+        var w = elements[q].width, h = elements[q].height;
+        var c = elements[q].col;
+        ctx.rect(x - w, y - h, 2 * w, 2 * h);
+        ctx.fillStyle = fillColor(c);
+        ctx.fill();
+    }
+}
+
+function fillColor(color) {
+    var resp = null;
+    switch (color) {
+        case "CYAN":
+            resp = "#00FFFF";
+            break;
+        case "GREEN":
+            resp = "#00FF00";
+            break;
+        case "ORANGE":
+            resp = "#FF8000";
+            break;
+        case "RED":
+            resp = "#FF0000";
+            break;
+        case "BLUE":
+            resp = "#0000FF";
+            break;
+        case "WHITE":
+            resp = "#FFFFFF";
+            break;
+    }
+    return resp;
+}
+
+function init() {
+    //var btnSend = document.getElementById('send');
+    //btnSend.onclick = sendMessage;
+    var btnConnect = document.getElementById('connect');
+    btnConnect.onclick = connect;
+    var btnDisconnect = document.getElementById('disconnect');
+    btnDisconnect.onclick = disconnect;
+    disconnect();
+}
+
+window.onload = init;

@@ -1,4 +1,4 @@
-package arsw.laberinto.game;
+package arsw.laberinto.model.game;
 
 public class Element {
 
