@@ -85,9 +85,11 @@ public class Mapa {
     //@Override
     public synchronized void sacarIdPlayer(String ids) {
         for (Player d : getJugadores()) {
-            if (d.getId().equals(ids)) {
-                d.setId(null);
-                break;
+            if (d.getId() != null) {
+                if (d.getId().equals(ids)) {
+                    d.setId(null);
+                    break;
+                }
             }
         }
     }
@@ -113,7 +115,7 @@ public class Mapa {
         }
         return resp;
     }
-    
+
     public synchronized List<Element> getRestriccionColored() {
         List<Element> resp = new ArrayList();
         for (Element e : restriccion) {

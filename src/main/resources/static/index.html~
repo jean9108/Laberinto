@@ -11,11 +11,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body ng-controller="laberinto" style="background:url(img/fondo2.jpg)">
+    <body ng-controller="laberinto" style="background:url(img/fondo.jpg)">
         <div style="alignment-baseline: central">
             <table>
                 <tr>
-                    <td><img src="img/logo.jpg" style = "width: 179px; height: 113px;" alt=""/></td>
+                    <td><img src="img/laberinto.jpg" style = "width: 179px; height: 113px;" alt=""/></td>
                     <td><h1 style="color: whitesmoke">Laberinto Multiplayer</h1></td>
                 </tr>
             </table>

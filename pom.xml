@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>laberinto-web</groupId>
-    <artifactId>Laberinto-Web</artifactId>
+    <artifactId>Laberinto-Web-Angular</artifactId>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.5.RELEASE</version>
+        <version>1.3.0.RELEASE</version>
     </parent>
 
     <dependencies>
