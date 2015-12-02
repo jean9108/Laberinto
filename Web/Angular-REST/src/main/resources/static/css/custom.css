@@ -14,7 +14,8 @@
 }
 
 .text {
-    color: whitesmoke;
+    /*color: whitesmoke;*/
+    font-size: 15px;
 }
 
 .error
