@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="js/libs/sockjs-0.3.4.js"></script>
+        <script src="js/libs/stomp.js"></script>
+        <script src="js/stomp-ws.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <title>Laberinto Multiplayer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body style="background:url(img/fondo2.jpg)">
+        <div id="header">
+            <table>
+                <tr>
+                    <td><img src="img/logo.png" id="logo" style = "width: 179px; height: 113px;" alt=""/></td>
+                    <td><h1 class="text">Laberinto Multiplayer</h1></td>
+                </tr>
+            </table>
+        </div>
+        <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable
+            Javascript and reload this page!</h2></noscript>
+        <div class="registro">
+            <div>
+                <label for="inputName">Name:</label>
+                <input id="inputName" type="text" class="input"/>
+            </div>
+            <div><span id="err" class="error"></span></div>
+            <div>
+                <button id="connect" class="Button2">Connect</button>
+                <button id="disconnect" disabled="disabled" class="Button2">Disconnect</button>
+            </div>
+        </div>
+        <div id="canvasDiv">
+            <canvas id="mapa" width="800" height="600"></canvas>
+        </div>
+    </body>
+</html>
